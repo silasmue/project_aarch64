@@ -1,0 +1,53 @@
+[
+ {
+  "directory": "/home/silas/git/project_aarch64",
+  "arguments": [
+   "aarch64-elf-gcc",
+   "-Ilib",
+   "-Wall",
+   "-nostdlib",
+   "-nostartfiles",
+   "-ffreestanding",
+   "-g",
+   "-c",
+   "src/start.S",
+   "-o",
+   "target/start.o"
+  ],
+  "file": "src/start.S"
+ },
+ {
+  "directory": "/home/silas/git/project_aarch64",
+  "arguments": [
+   "aarch64-elf-gcc",
+   "-Ilib",
+   "-Wall",
+   "-nostdlib",
+   "-nostartfiles",
+   "-ffreestanding",
+   "-g",
+   "-c",
+   "src/kernel.c",
+   "-o",
+   "target/kernel.o"
+  ],
+  "file": "src/kernel.c"
+ },
+ {
+  "directory": "/home/silas/git/project_aarch64",
+  "arguments": [
+   "aarch64-elf-gcc",
+   "-Ilib",
+   "-Wall",
+   "-nostdlib",
+   "-nostartfiles",
+   "-ffreestanding",
+   "-g",
+   "-c",
+   "lib/printf.c",
+   "-o",
+   "target/lib/printf.o"
+  ],
+  "file": "lib/printf.c"
+ }
+]
