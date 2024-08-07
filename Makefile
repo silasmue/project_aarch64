@@ -8,7 +8,8 @@ CC = $(PREFIX)gcc $(INCLUDES) $(FLAGS)
 
 LIBSRC = $(wildcard lib/*.c)
 LIB_O = target/$(LIBSRC:%.c=%.o)
-
+DRIVERSRC = $(wildcard src/driver*.c)
+DRIVER_O = target/$(DRIVERSRC:%.c=%.o)
 
 all: img
 
@@ -17,22 +18,26 @@ target:
 
 target/lib: target
 	mkdir -p target/lib
-
+	mkdir -p target/src/driver
 start.o: src/start.S target
 	@echo "Compiling start.S"
 	$(CC) -c src/start.S -o target/start.o
 
-kernel.o: src/kernel.c target
+kernel.o: src/kernel.c target 
 	@echo "Compiling kernel.c"
 	$(CC) -c src/kernel.c -o target/kernel.o
+
+uart.o:
+	@echo "Compiling module uart.c"
+	$(CC) -c src/drivers/uart.c -o target/uart.o
 
 lib: target/lib
 	@echo "Compiling libraries"
 	$(CC) -c $(LIBSRC) -o $(LIB_O)
 
-linking: start.o kernel.o lib
+linking: start.o kernel.o lib uart.o
 	@echo "Linking..."
-	$(PREFIX)ld -g -m aarch64elf -nostdlib -T linker.ld target/start.o target/kernel.o $(LIB_O) -o target/kernel8.elf
+	$(PREFIX)ld -g -m aarch64elf -nostdlib -T linker.ld target/start.o target/kernel.o target/uart.o $(LIB_O) -o target/kernel8.elf
 
 img: linking
 	@echo "Making the image"

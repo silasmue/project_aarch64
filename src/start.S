@@ -1,4 +1,9 @@
-.section ".init"
+#
+# Copyright © 2023 inpyjama.com. All Rights Reserved.
+# Author: Mahmad Bharmal <mahmad@inpyjama.com>
+#
+
+  .section ".init"
 _start:
     mrs     x1, mpidr_el1
     and     x1, x1, #3
