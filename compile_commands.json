@@ -49,5 +49,39 @@
    "target/lib/printf.o"
   ],
   "file": "lib/printf.c"
+ },
+ {
+  "directory": "/home/silas/git/project_aarch64",
+  "arguments": [
+   "aarch64-elf-gcc",
+   "-Ilib",
+   "-Wall",
+   "-nostdlib",
+   "-nostartfiles",
+   "-ffreestanding",
+   "-g",
+   "-c",
+   "src/drivers/uart.c",
+   "-o",
+   "target/uart.o"
+  ],
+  "file": "src/drivers/uart.c"
+ },
+ {
+  "directory": "/home/silas/git/project_aarch64",
+  "arguments": [
+   "aarch64-elf-gcc",
+   "-Ilib",
+   "-Wall",
+   "-nostdlib",
+   "-nostartfiles",
+   "-ffreestanding",
+   "-g",
+   "-c",
+   "src/drivers/gpio.c",
+   "-o",
+   "target/gpio.o"
+  ],
+  "file": "src/drivers/gpio.c"
  }
 ]

@@ -31,14 +31,16 @@ uart.o:
 	@echo "Compiling module uart.c"
 	$(CC) -c src/drivers/uart.c -o target/uart.o
 
+gpio.o:
+	@echo "Compiling module gpio.c"
+	$(CC) -c src/drivers/gpio.c -o target/gpio.o
 lib: target/lib
 	@echo "Compiling libraries"
 	$(CC) -c $(LIBSRC) -o $(LIB_O)
 
-linking: start.o kernel.o lib uart.o
+linking: start.o kernel.o lib uart.o gpio.o
 	@echo "Linking..."
-	$(PREFIX)ld -g -m aarch64elf -nostdlib -T linker.ld target/start.o target/kernel.o target/uart.o $(LIB_O) -o target/kernel8.elf
-
+	$(PREFIX)ld -L../newlib-cygwin/aarch64-elf/newlib/libc.a -g -m aarch64elf -nostdlib -T linker.ld target/start.o target/kernel.o target/uart.o target/gpio.o $(LIB_O) -o target/kernel8.elf
 img: linking
 	@echo "Making the image"
 	$(PREFIX)objcopy target/kernel8.elf -O binary kernel8.img
